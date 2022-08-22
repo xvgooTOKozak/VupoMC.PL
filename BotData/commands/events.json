@@ -1,0 +1,1635 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [
+        {
+          "name": "xp_set_0_1",
+          "category": "User Data",
+          "type": "Set User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "field": "xp",
+          "fieldvalue": "0"
+        },
+        {
+          "name": "autorole",
+          "category": "User Action",
+          "type": "Add Role to User",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "rolename": "niezweryfikowany"
+        },
+        {
+          "name": "powitanie",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "1010956510316204154",
+          "color": "E600D3",
+          "title": "",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Cześć <@${tempVars.newuser.id}>\n⠀⠀⠀⠀⠀⠀Witam Cię na oficjalnym discordzie **VupolMC.PL**\n⠀",
+          "thumbnail": "",
+          "image": "https://media.discordapp.net/attachments/937832811019259914/973312045590142986/witaj.jpg?width=1440&height=395",
+          "footer": "⠀⠀ Mamy nadzieję, że zostaniesz z nami na dłużej! ",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "level_set_0",
+          "category": "User Data",
+          "type": "Set User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "field": "level",
+          "fieldvalue": "0"
+        },
+        {
+          "name": "ban set 0",
+          "category": "User Data",
+          "type": "Set User Data",
+          "messageActionRows": [],
+          "user": "<@${tempVars.newuser.id}>",
+          "field": "ban",
+          "fieldvalue": "0"
+        },
+        {
+          "name": "kick set zero",
+          "category": "User Data",
+          "type": "Set User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "field": "kick",
+          "fieldvalue": "0"
+        }
+      ],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [
+        {
+          "name": "random_xp",
+          "category": "Variable",
+          "type": "Generate Random Number",
+          "messageActionRows": [],
+          "varname": "rng_xp",
+          "min": "5",
+          "max": "20",
+          "savevartype": "temp"
+        },
+        {
+          "name": "czy podanie",
+          "category": "Variable",
+          "type": "Check If String Contains",
+          "trueActions": [
+            {
+              "name": "usun podanie",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.anymessage.id}",
+              "channelname": "${tempVars.anymessage.channel.id}"
+            },
+            {
+              "name": "wyslij podanie",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "1008708357370150953",
+              "color": "FFFFFF",
+              "title": "podanie",
+              "url": "",
+              "authorname": "${tempVars.anymessagemember.displayName}",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "${tempVars.anymessage.content}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "stringtocheck": "${tempVars.anymessage.content}",
+          "valuetocheck": "podanie"
+        },
+        {
+          "name": "xp_add",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "xp",
+          "oper": "+",
+          "value": "${tempVars.rng_xp}"
+        },
+        {
+          "name": "check_xp",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "xp_set_0",
+              "category": "User Data",
+              "type": "Set User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "xp",
+              "fieldvalue": "0"
+            },
+            {
+              "name": "level_add",
+              "category": "User Data",
+              "type": "Edit User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "level",
+              "oper": "+",
+              "value": "1"
+            },
+            {
+              "name": "level get",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "level",
+              "varname": "level",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "level up msg",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "920329033420509274",
+              "messagetext": "Użytkownik ${tempVars.anymessagemember.displayName} właśnie zdobył nowy level.\nAktualny poziom ${tempVars.level}.",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "xp",
+          "compare": "greater than",
+          "value": "100"
+        }
+      ],
+      "var": {}
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [
+        {
+          "name": "czy kick",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "kick log",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "919991814348488764",
+              "messagetext": "Osoba ${tempVars.kickuser.user.tag} została wyrzucona z serwera discord ",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "dodaj 1 do licznika kick",
+              "category": "User Data",
+              "type": "Edit User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.kickuser.id}",
+              "field": "ilekick",
+              "oper": "+",
+              "value": "1"
+            },
+            {
+              "name": "liczba kickow",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.kickuser.id}",
+              "field": "ilekick",
+              "varname": "kick",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "liczba kick",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "919991814348488764",
+              "messagetext": "To jego/jej ${tempVars.kick} kick",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "left log",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "919991814348488764",
+              "messagetext": "Osoba ${tempVars.kickuser.user.tag} opuściła serwer",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${tempVars.kickuser.id}",
+          "field": "kick",
+          "compare": "equal to",
+          "value": "1"
+        },
+        {
+          "name": "ilosc osob na serwerze",
+          "category": "Channel Action",
+          "type": "Create Channel",
+          "messageActionRows": [],
+          "channelname": "Jest nasz: ${tempVars.updatedguildold.memberCount}",
+          "chancategory": "statystyki",
+          "reason": "",
+          "channeltype": "Text",
+          "savetovariable": "stats",
+          "savetovariabletype": "server"
+        },
+        {
+          "name": "blokuj polaczenie z kanalem",
+          "category": "Channel Action",
+          "type": "Update Channel Permissions",
+          "messageActionRows": [],
+          "channelname": "${serverVars.stats.id}",
+          "permid": "867419032440799233",
+          "permissions": [
+            "CONNECT"
+          ],
+          "allow": "Deny"
+        }
+      ],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [
+        {
+          "name": "ban log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Osoba ${tempVars.banuser.user.tag} została zbanowana",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "dodaj 1 do licznika ban",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.banuser.id}",
+          "field": "ileban",
+          "oper": "+",
+          "value": "1"
+        },
+        {
+          "name": "liczba banow",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.banuser.id}",
+          "field": "ileban",
+          "varname": "ban",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "liczba ban",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Miał on/ona już ${tempVars.ban} banów",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [
+        {
+          "name": "ticket",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [
+            {
+              "rowtype": "button",
+              "buttons": [
+                {
+                  "label": "📜Kliknij, aby utworzyć ticket!",
+                  "customid": "2",
+                  "style": "SECONDARY",
+                  "emoji": "",
+                  "URL": "",
+                  "ephemeral": false
+                }
+              ]
+            }
+          ],
+          "channelname": "1010956527403802744",
+          "color": "D103FF",
+          "title": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 📁Tickety",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "⠀⠀⠀Kliknij w przycisk poniżej, aby utworzyć ticketa\n⠀⠀⠀⠀⠀kanał pomocy do którego będziesz miał dostęp tylko i\n⠀⠀⠀⠀⠀⠀⠀⠀ wyłącznie Ty oraz administracja serwera.",
+          "thumbnail": "",
+          "image": "https://media.discordapp.net/attachments/973311404503339038/973312443939971082/ticket.jpg?width=1440&height=395",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "usun wiadomosci",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "920323518351151104",
+          "msgcount": "3"
+        },
+        {
+          "name": "wiek msg",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [
+            {
+              "rowtype": "select",
+              "customid": "1",
+              "placeholdertext": "rola do wyboru",
+              "selectoptions": [
+                {
+                  "label": "-12",
+                  "value": "1",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                },
+                {
+                  "label": "12-18",
+                  "value": "2",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                },
+                {
+                  "label": "18+",
+                  "value": "3",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                }
+              ]
+            }
+          ],
+          "channelname": "920323518351151104",
+          "color": "FFFFFF",
+          "title": "wiek",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Wybierz role wieku",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "ping msg",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [
+            {
+              "rowtype": "select",
+              "customid": "2",
+              "placeholdertext": "tak/nie",
+              "selectoptions": [
+                {
+                  "label": "tak",
+                  "value": "4",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                },
+                {
+                  "label": "nie",
+                  "value": "5",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                }
+              ]
+            }
+          ],
+          "channelname": "920323518351151104",
+          "color": "FFFFFF",
+          "title": "ping",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "czy chcesz być pingowany?",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "kolor msg",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [
+            {
+              "rowtype": "select",
+              "customid": "3",
+              "placeholdertext": "kolory do wyboru",
+              "selectoptions": [
+                {
+                  "label": "biały",
+                  "value": "6",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                },
+                {
+                  "label": "czerwony",
+                  "value": "7",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                },
+                {
+                  "label": "niebieski",
+                  "value": "8",
+                  "description": "",
+                  "emoji": "",
+                  "defaultoption": false
+                }
+              ]
+            }
+          ],
+          "channelname": "920323518351151104",
+          "color": "FFFFFF",
+          "title": "kolor",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "wybierz kolor nick",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {}
+    },
+    {
+      "name": "Channel Create",
+      "perms": [],
+      "actions": [
+        {
+          "name": "kanal utworz log",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "color": "8F00FF",
+          "title": "Utworzono kanał",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Utworzono kanał o nazwie: ${tempVars.createdchannel.name}\nTyp kanału:${tempVars.createdchannel.type}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "createdchannel"
+      }
+    },
+    {
+      "name": "Channel Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "kanal usun log",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "color": "8F00FF",
+          "title": "Usunięcie kanału",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Kanał ${tempVars.deletedchannel.name} został usunięty",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "deletedchannel"
+      }
+    },
+    {
+      "name": "Channel Pins Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatepinschannel"
+      }
+    },
+    {
+      "name": "Channel Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "kanal update log",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "color": "8700FF",
+          "title": "Aktualizacja kanału",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "**Przed:**\n- nazwa: ${tempVars.updatedchannelold.name}\n- pozycja: \n${tempVars.updatedchannelold.position}\n**Po:**\n- nazwa: ${tempVars.updatedchannelnew.name}\n- pozycja: \n${tempVars.updatedchannelnew.position}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "updatechannel"
+      }
+    },
+    {
+      "name": "Emoji Create",
+      "perms": [],
+      "actions": [
+        {
+          "name": "emoji utworz log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Dodano nowe emoji ${tempVars.createdemoji}\nDodał je ${tempVars.createdemoji.author}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "createdemoji"
+      }
+    },
+    {
+      "name": "Emoji Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "emoji usun log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Usunięto emoji ${tempVars.deletedemoji.name}\nZostało ono usunięte przez ${tempVars.deletedemoji.author}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "deletedemoji"
+      }
+    },
+    {
+      "name": "Emoji Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Aktualizacja emoji log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Zmieniono nazwę emoji ${tempVars.updatedemojiold} na ${tempVars.updatedemojinew.name}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "updatedemoji"
+      }
+    },
+    {
+      "name": "Guild Ban Remove",
+      "perms": [],
+      "actions": [
+        {
+          "name": "unban log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Osoba ${tempVars.banremoveduser.user.tag} dostał unbanowana",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Available",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Speaking",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "aktualizacja danych uzytkownika log",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "color": "8700FF",
+          "title": "Aktualizacja danych użytkownika",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "**Przed**\n- nazwa: ${tempVars.updatedmemberold.nickname}\n- nazwa wyświetlana: ${tempVars.updatedmemberold.displayName}\n- awatar: ${tempVars.updatedmemberold.user.avatarURL}\n**Aktualnie**\n- nazwa: ${tempVars.updatedmembernew.nickname}\n- nazwa wyświetlana: ${tempVars.updatedmembernew.displayName}\n- awatar: ${tempVars.updatedmembernew.user.avatarURL}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Unavailable",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Create",
+      "perms": [],
+      "actions": [
+        {
+          "name": "role utworz log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Utworzono nową role ${tempVars.createdrole}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "role usun log",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Usunięto role ${tempVars.deletedrole.name}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "aktualizacja roli",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "919991814348488764",
+          "messagetext": "Aktualizacja roli: ${tempVars.updatedroleold.name}\nAktualna nazwa: ${tempVars.updatedrolenew}\nAktualny kolor: ${tempVars.updatedrolenew.hexColor}\nAktualna pozycja: ${tempVars.updatedrolenew.position}",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Typing Start",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "User Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Button Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "button_switch",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "1": [
+              {
+                "name": "msg_dm_weryfikacja",
+                "category": "Message",
+                "type": "Send Direct Message",
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "messagetext": "Weryfikacja powiodła się",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "rola weryfikacji",
+                "category": "User Action",
+                "type": "Add Role to User",
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "rolename": "1010137233019392011"
+              },
+              {
+                "name": "usuwanie",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "msgcount": "2"
+              }
+            ],
+            "2": [
+              {
+                "name": "tworzenie kanalu do ticket",
+                "category": "Channel Action",
+                "type": "Create Channel",
+                "messageActionRows": [],
+                "channelname": "ticket ",
+                "chancategory": "1010956504112824482",
+                "reason": "ticket osoby ${tempVars.buttoninteraction.member.displayName}",
+                "channeltype": "Text",
+                "savetovariable": "kanal_ticket",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "dostęp do kanału",
+                "category": "Channel Action",
+                "type": "Update Channel Permissions",
+                "messageActionRows": [],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "permid": "${tempVars.buttoninteraction.member.id}",
+                "permissions": [
+                  "VIEW_CHANNEL",
+                  "SEND_MESSAGES"
+                ],
+                "allow": "Allow"
+              },
+              {
+                "name": "ticket_embed_menu",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [
+                  {
+                    "rowtype": "button",
+                    "buttons": [
+                      {
+                        "label": "zamykanie ticket",
+                        "customid": "2.1",
+                        "style": "PRIMARY",
+                        "emoji": "",
+                        "URL": ""
+                      }
+                    ]
+                  }
+                ],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "color": "FFFFFF",
+                "title": "ticket",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "Witaj <@${tempVars.buttoninteraction.member.id}>\nMasz problem lub chces zgłoszić cheatera opisz nam twoj problem albo cheatera!",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "false",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "usuwanie_1",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "msgcount": "1"
+              }
+            ],
+            "4": [
+              {
+                "name": "tworzenie kanalu",
+                "category": "Channel Action",
+                "type": "Create Channel",
+                "messageActionRows": [],
+                "channelname": "ticket1",
+                "chancategory": "1010137236349653073",
+                "reason": "ticket osoby ${tempVars.buttoninteraction.user.tag}",
+                "channeltype": "Text",
+                "savetovariable": "kanal_ticket",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "dostęp do kanału_1",
+                "category": "Channel Action",
+                "type": "Update Channel Permissions",
+                "messageActionRows": [],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "permid": "${tempVars.buttoninteraction.member.id}",
+                "permissions": [
+                  "VIEW_CHANNEL",
+                  "SEND_MESSAGES"
+                ],
+                "allow": "Allow"
+              },
+              {
+                "name": "ticket_embed_menu_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [
+                  {
+                    "rowtype": "button",
+                    "buttons": [
+                      {
+                        "label": "zamykanie ticket",
+                        "customid": "2.1",
+                        "style": "PRIMARY",
+                        "emoji": "",
+                        "URL": "",
+                        "ephemeral": false
+                      }
+                    ]
+                  }
+                ],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "color": "FFFFFF",
+                "title": "ticket",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "Witaj ${tempVars.buttoninteraction.member.displayName}.\nChces Fuzje Ile masz osob?",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "false",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "usuwanie_1_2",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "msgcount": "1"
+              }
+            ],
+            "6": [
+              {
+                "name": "tworzenie kanalu_1",
+                "category": "Channel Action",
+                "type": "Create Channel",
+                "messageActionRows": [],
+                "channelname": "ticket2",
+                "chancategory": "1010137236349653073",
+                "reason": "ticket osoby ${tempVars.buttoninteraction.user.tag}",
+                "channeltype": "Text",
+                "savetovariable": "kanal_ticket",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "dostęp do kanału_1_1",
+                "category": "Channel Action",
+                "type": "Update Channel Permissions",
+                "messageActionRows": [],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "permid": "${tempVars.buttoninteraction.member.id}",
+                "permissions": [
+                  "VIEW_CHANNEL",
+                  "SEND_MESSAGES"
+                ],
+                "allow": "Allow"
+              },
+              {
+                "name": "ticket_embed_menu_1_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [
+                  {
+                    "rowtype": "button",
+                    "buttons": [
+                      {
+                        "label": "zamykanie ticket",
+                        "customid": "2.1",
+                        "style": "PRIMARY",
+                        "emoji": "",
+                        "URL": "",
+                        "ephemeral": false
+                      }
+                    ]
+                  }
+                ],
+                "channelname": "${tempVars.kanal_ticket.id}",
+                "color": "FFFFFF",
+                "title": "ticket",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "Witaj ${tempVars.buttoninteraction.member.displayName}.\nMasz sprawe napisz!",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "false",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "usuwanie_1_2_1",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "msgcount": "1"
+              }
+            ],
+            "100": [],
+            "2.1": [
+              {
+                "name": "ticket_potwierdzenie",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [
+                  {
+                    "rowtype": "button",
+                    "buttons": [
+                      {
+                        "label": "tak",
+                        "customid": "2.1.1",
+                        "style": "SUCCESS",
+                        "emoji": "",
+                        "URL": ""
+                      },
+                      {
+                        "label": "nie",
+                        "customid": "2.1.2",
+                        "style": "DANGER",
+                        "emoji": "",
+                        "URL": ""
+                      }
+                    ]
+                  }
+                ],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "color": "FFFFFF",
+                "title": "potwierdzenie",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "czy jesteś pewien że chcesz zamknąć ticketa?",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "false",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "2.1.1": [
+              {
+                "name": "ticket_potwierdzenie_tak",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "messagetext": "kanał zostanie usunięty za 5 sekund",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "5s",
+                "category": "Control",
+                "type": "Wait",
+                "messageActionRows": [],
+                "waitduration": "5",
+                "unit": "seconds"
+              },
+              {
+                "name": "usun kanal",
+                "category": "Channel Action",
+                "type": "Delete Channel",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "reason": "zamknięcie ticketa"
+              }
+            ],
+            "2.1.2": [
+              {
+                "name": "ticket potwierdzenie nie",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${tempVars.buttoninteraction.channelId}",
+                "messagetext": "zamykanie ticket zostało przerwane",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "6.1": [],
+            "6.2": []
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.buttoninteraction.customId}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Select Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "select switch",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "1": [
+              {
+                "name": "wiek switch",
+                "category": "Control",
+                "type": "Switch Case",
+                "valueActions": {
+                  "1": [
+                    {
+                      "name": "wiek role",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "-12"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ],
+                  "2": [
+                    {
+                      "name": "wiek role_1",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "12-18"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ],
+                  "3": [
+                    {
+                      "name": "wiek role_1_1",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "18+"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ]
+                },
+                "messageActionRows": [],
+                "varname": "${tempVars.selectinteraction.values}"
+              }
+            ],
+            "2": [
+              {
+                "name": "ping switch",
+                "category": "Control",
+                "type": "Switch Case",
+                "valueActions": {
+                  "4": [
+                    {
+                      "name": "ping role",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "Yes ping"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ],
+                  "5": [
+                    {
+                      "name": "ping role_1",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "No ping"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ]
+                },
+                "messageActionRows": [],
+                "varname": "${tempVars.selectinteraction.values}"
+              }
+            ],
+            "3": [
+              {
+                "name": "kolor switch",
+                "category": "Control",
+                "type": "Switch Case",
+                "valueActions": {
+                  "6": [
+                    {
+                      "name": "kolor role",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "bialy"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ],
+                  "7": [
+                    {
+                      "name": "kolor role_1",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "czerwony"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ],
+                  "8": [
+                    {
+                      "name": "kolor role_1_1",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "rolename": "niebieski"
+                    },
+                    {
+                      "name": "selfrole dm",
+                      "category": "Message",
+                      "type": "Send Direct Message",
+                      "messageActionRows": [],
+                      "user": "${tempVars.selectinteraction.member.id}",
+                      "messagetext": "Właśnie odebrałeś role na serwerze discord ${tempVars.selectinteraction.guild.name}",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    },
+                    {
+                      "name": "usuwanie_1_1",
+                      "category": "Channel Action",
+                      "type": "Delete All Messages",
+                      "messageActionRows": [],
+                      "channelname": "${tempVars.selectinteraction.channelId}",
+                      "msgcount": "1"
+                    }
+                  ]
+                },
+                "messageActionRows": [],
+                "varname": "${tempVars.selectinteraction.values}"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.selectinteraction.customId}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Command Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "nawza komendy",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "kick": [
+              {
+                "name": "check permissions",
+                "category": "User Action",
+                "type": "Check User Permissions",
+                "trueActions": [
+                  {
+                    "name": "uzytkownik",
+                    "category": "Interaction",
+                    "type": "Get Interaction Option",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.commandinteraction}",
+                    "optiontype": "USER",
+                    "commandoptionname": "user",
+                    "varname": "user",
+                    "savevartype": "temp"
+                  },
+                  {
+                    "name": "powod",
+                    "category": "Interaction",
+                    "type": "Get Interaction Option",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.commandinteraction}",
+                    "optiontype": "STRING",
+                    "commandoptionname": "reason",
+                    "varname": "reason",
+                    "savevartype": "temp"
+                  },
+                  {
+                    "name": "kick msg",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "Pomyślnie wyrzucono z serwera użytkownika <@${tempVars.user.id}> z powodu: ${tempVars.reason}"
+                  },
+                  {
+                    "name": "kick",
+                    "category": "User Action",
+                    "type": "Kick User",
+                    "messageActionRows": [],
+                    "user": "${tempVars.user.user.tag}",
+                    "reason": "${tempVars.reason}"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "brak uprawnien",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "Nie masz uprawnień by użyć tej komendy"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "permissions": [
+                  "KICK_MEMBERS"
+                ]
+              }
+            ],
+            "ban": [
+              {
+                "name": "check permissions_1",
+                "category": "User Action",
+                "type": "Check User Permissions",
+                "trueActions": [
+                  {
+                    "name": "uzytkownik_1",
+                    "category": "Interaction",
+                    "type": "Get Interaction Option",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.commandinteraction}",
+                    "optiontype": "USER",
+                    "commandoptionname": "user",
+                    "varname": "user",
+                    "savevartype": "temp"
+                  },
+                  {
+                    "name": "powod_1",
+                    "category": "Interaction",
+                    "type": "Get Interaction Option",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.commandinteraction}",
+                    "optiontype": "STRING",
+                    "commandoptionname": "reason",
+                    "varname": "reason",
+                    "savevartype": "temp"
+                  },
+                  {
+                    "name": "ban msg",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "Pomyślnie zbanowano użytkownika <@${tempVars.user.id}> z powodu: ${tempVars.reason}"
+                  },
+                  {
+                    "name": "ban",
+                    "category": "User Action",
+                    "type": "Ban User",
+                    "messageActionRows": [],
+                    "user": "${tempVars.user.user.tag}",
+                    "reason": "${tempVars.reason}",
+                    "days": ""
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "brak uprawnien_1",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "Nie masz uprawnień by użyć tej komendy"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "permissions": [
+                  "BAN_MEMBERS"
+                ]
+              }
+            ],
+            "ping": [
+              {
+                "name": "pong",
+                "category": "Interaction",
+                "type": "Reply To Interaction With Message",
+                "messageActionRows": [],
+                "interactionobject": "${tempVars.commandinteraction}",
+                "messagetext": "pong"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.commandinteraction.commandName}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    }
+  ]
+}
